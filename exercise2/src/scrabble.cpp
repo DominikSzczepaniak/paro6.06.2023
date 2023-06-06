@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+
 int scrabble(std::string slowo){
     std::vector<char> ones = {'A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'};
     std::vector<char> twos = {'D', 'G'};
@@ -38,10 +39,9 @@ int scrabble(std::string slowo){
     return wynik;
 }
 
-int test(){
+void test(){
     if(scrabble("cabbage") != 14){
         std::cout << "nie dziala :(" << std::endl;
-        exit(0);
     }
 }
 
