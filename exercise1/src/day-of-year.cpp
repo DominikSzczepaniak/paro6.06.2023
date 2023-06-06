@@ -1,29 +1,26 @@
 #include "day-of-year.hpp"
 
 int dayOfYear(int month, int dayOfMonth, int year) {
-    if (month == 2) {
-        dayOfMonth += 31;
-    } else if (month == 3) {
-        dayOfMonth += 59;
-    } else if (month == 4) {
-        dayOfMonth += 90;
-    } else if (month == 5) {
-        dayOfMonth += 31 + 28 + 31 + 30;
-    } else if (month == 6) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31;
-    } else if (month == 7) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30;
-    } else if (month == 8) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31;
-    } else if (month == 9) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31;
-    } else if (month == 10) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30;
-    } else if (month == 11) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31;
-    } else if (month == 12) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 31;
+    return dayOfMonth + rec(1, month, year);
+}
+
+int rec(int month, int end, int year){
+    if(month == end){
+        return 0;
     }
-    return dayOfMonth;
+    else if((month % 2 == 1 && month <= 7) || (month % 2 == 0 && month > 7)){
+        return 31 + rec(month+1, end, year);
+    }
+    else if(month == 2){
+        if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+            return 29 + rec(month+1, end, year);
+        }
+        else{
+            return 28 + rec(month+1, end, year);
+        }
+    }
+    else if((month % 2 == 0 && month != 2 && month < 7) || (month % 2 == 1 && month > 7)){
+        return 30 + rec(month + 1, end, year);
+    }
 }
 
